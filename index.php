@@ -1,42 +1,12 @@
 <?php
 
-//include 'point.php';
-//
-//$point = new Point(5,3);
-//print_r($point);
-//echo '<br>';
-//echo $point->draw();
-
-trait СanMove{
-    public function move(){
-        return 'Движение автомобиля';
-    }
-}
-
-trait СanFly{
-    public function fly(){
-        return 'Полёт самолёта';
-    }
-}
-
-class Car  {
-    use СanMove;
-}
-
-class Aircraft  {
-    use СanFly;
-}
-
-
+require_once 'start.php';
 
 $car = new Car();
 echo $car->move();
-
-
+echo '<br>';
 $aircraft = new Aircraft();
 echo $aircraft->fly();
-
-
 
 
 
