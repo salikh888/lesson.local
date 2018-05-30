@@ -4,4 +4,3 @@ class Car
 {
     use СanMove;
 }
-
