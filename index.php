@@ -32,12 +32,43 @@ require_once 'start.php';
 //foreach ($arr as $k => $v) echo "$k = $v; ";
 //echo '<br />';
 
-$i = 0;
+//$i = 0;
 $thisDir = 'D:\Pictures';
-$dir = dir($thisDir);
-while (($file = $dir->read()) !== false) {
-    if(is_file($thisDir.'/'.$file)){
-        echo $file.' - Файл'.'<br>';
+//$dir = dir($thisDir);
+//
+//while (($file = $dir->read()) !== false) {
+//    if (is_file($thisDir . '/' . $file)) {
+//        echo $file . ' - Файл' . '<br>';
+//    } else {
+//        echo $file . ' - Нефайл' . '<br>';
+//    }
+//}
+
+//$dir = scandir($thisDir);
+//print_r($dir);
+//foreach ($dir as $file){
+//    if(is_file($file)){
+//        echo $file . ' - Файл' . '<br>';
+//    }else foreach (scandir($file) as  $file2)
+//        echo $file2 . ' - Файл' . '<br>';
+//
+//}
+
+mkdir('new dir');
+rmdir('new dir');
+
+$arr = glob('*.php');
+print_r($arr);
+
+function printDir($folder, $space = '') {
+    $files = scandir($folder);
+    foreach ($files as $file) {
+        if ($file == '.' || $file == '..') continue;
+        $f = $folder.'/'.$file;
+        echo $space.$file.'<br />';
+        if (is_dir($f)) printDir($f, $space.'&nbsp;&nbsp;');
     }
-    else echo $file.' - Нефайл'.'<br>';
 }
+echo '<br />';
+
+echo printDir($thisDir);
