@@ -1,6 +1,7 @@
 <?php
 
 require_once 'start.php';
+require_once 'allDir.php';
 
 //$car = new Car();
 //echo $car->move();
@@ -33,7 +34,7 @@ require_once 'start.php';
 //echo '<br />';
 
 //$i = 0;
-$thisDir = 'D:\Pictures';
+
 //$dir = dir($thisDir);
 //
 //while (($file = $dir->read()) !== false) {
@@ -44,31 +45,13 @@ $thisDir = 'D:\Pictures';
 //    }
 //}
 
-//$dir = scandir($thisDir);
-//print_r($dir);
-//foreach ($dir as $file){
-//    if(is_file($file)){
-//        echo $file . ' - Файл' . '<br>';
-//    }else foreach (scandir($file) as  $file2)
-//        echo $file2 . ' - Файл' . '<br>';
-//
-//}
 
-mkdir('new dir');
-rmdir('new dir');
+//mkdir('new dir');
+//rmdir('new dir');
 
-$arr = glob('*.php');
-print_r($arr);
+//$arr = glob('*.php');
+//print_r($arr);
 
-function printDir($folder, $space = '') {
-    $files = scandir($folder);
-    foreach ($files as $file) {
-        if ($file == '.' || $file == '..') continue;
-        $f = $folder.'/'.$file;
-        echo $space.$file.'<br />';
-        if (is_dir($f)) printDir($f, $space.'&nbsp;&nbsp;');
-    }
-}
-echo '<br />';
 
-echo printDir($thisDir);
+
+echo AllDir('D:\Евгений');
