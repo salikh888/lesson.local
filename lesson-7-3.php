@@ -23,7 +23,7 @@ if (isset($_POST['submit']) && !empty($_POST['bgcolor'])){
     <title>Document</title>
 </head>
 <body>
-<form class="form form-row p-md-5" action="index.php" method="post">
+<form class="form form-row p-md-5" action="lesson-7-3.php" method="post">
     <div class="container bgc">
         <div class="">
             <input class="radio" type="radio" id="check1" name="bgcolor" value="red"
