@@ -40,8 +40,8 @@
 </head>
 <body>
 <div class="container h-100">
-    <div class="row h-100 justify-content-center align-items-center">
-        <form action="mail.php" method="post" name="mail">
+    <div class="row h-100  justify-content-center align-items-center">
+        <form class="form-control-range" action="mail.php" method="post" name="mail">
             <div class="form-group">
                 <label for="from">
                     От кого:
@@ -64,10 +64,10 @@
                 <label for="text">
                     Текст письма:
                 </label>
-                <textarea class="form-control" id="text" name="text"></textarea>
+                <textarea class="form-control" id="text" name="text" rows="10"></textarea>
             </div>
             <div class="form-group">
-                <input class="form-control" type="submit" name="submit" value="Отправить">
+                <input class="form-control col-2 btn btn-primary " type="submit" name="submit" value="Отправить">
             </div>
         </form>
 
