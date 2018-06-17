@@ -55,9 +55,9 @@ if (isset($_FILES['file'])) {
     <title>Document</title>
 </head>
 <body>
-<?= $_COOKIE['ref'];?>
+<?= $_COOKIE['ref']; ?>
 
-<form  action="index.php" enctype="multipart/form-data" method="post">
+<form action="index.php" enctype="multipart/form-data" method="post">
     Файл: <input type="file" name="file">
     <input type="submit" name="submintbut" value="Отправить">
 </form>
