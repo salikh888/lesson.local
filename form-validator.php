@@ -22,7 +22,7 @@ function validateForm($formData)
 
 function validatemail($email)
 {
-    return preg_match('/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i/', $email);
+    return preg_match('/[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}/', $email);
 }
 
 

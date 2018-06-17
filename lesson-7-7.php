@@ -2,28 +2,43 @@
 /**
  * Created by PhpStorm.
  * User: User
- * Date: 16.06.2018
- * Time: 15:42
+ * Date: 17.06.2018
+ * Time: 14:33
  */
+require_once 'start.php';
+
 require_once 'form-validator.php';
-$noErrors = 0;
 $error = true;
+if (isset($_FILES['file'])) {
+    $fileName = $_FILES['file']['name'];
+
+    $uploadDir = 'files/';
+    $fileNameWithPath = $uploadDir . $fileName;
+
+    if (move_uploaded_file($_FILES['file']['tmp_name'], $fileNameWithPath)) {
+
+        unlink($_FILES['file']['tmp_name']);
+    }
+}
 $submitted = $_POST['submit'];
 $from = trim(mb_strtolower($_POST['from']));
 $to = trim(mb_strtolower($_POST['to']));
 $subject = trim($_POST['subject']);
 $text = $_POST['text'];
+$file = $_FILES['file']['tmp_name'];
 $formData = [
     'from' => null,
     'to' => null,
     'subject' => null,
-    'text' => null
+    'text' => null,
+    'file' => null
 ];
 $formErrors = [
     'from' => null,
     'to' => null,
     'subject' => null,
-    'text' => null
+    'text' => null,
+    'file' => null
 ];
 
 if ($submitted) {
@@ -31,23 +46,30 @@ if ($submitted) {
         'from' => $from,
         'to' => $to,
         'subject' => $subject,
-        'text' => $text
+        'text' => $text,
+        'file' => $fileNameWithPath
     ];
 
+    $mail = new PHPMailer();
+    $mail->CharSet = 'utf-8';
+    $mail->setFrom($formData['from']);
+    $mail->addAddress($formData['to']);
+    $mail->addReplyTo('info@example.com', 'Information');
+    $mail->addAttachment($formData['file']);
+    $mail->isHTML(true);
+    $mail->Subject = $formData['subject'];
+    $mail->Body = $formData['text'];
+    $mail->AltBody = $formData['text'];
     $formErrors = validateForm($formData);
     $noErrors = count($formErrors) === 0;
     if ($noErrors) {
-
-        $headers = 'From:' . $formData['from'] . '\r\n';
-        $headers .= 'Reply-to: <admin@mysite.ru>\r\n';
-        $headers .= 'Content-type: text/html; charset=utf-8';
-        $subject = '=?utf-8?B?' . base64_encode($formData['subject']) . '?=';
-
-        if (mail($formData['to'], $subject, $formData['text'], $headers)) $error = false;
+        if ($mail->send()) {
+            $error = false;;
+        }
     }
+    unlink($formData['file']);
 }
 ?>
-
 
 <!doctype html>
 <html lang="en">
@@ -63,7 +85,8 @@ if ($submitted) {
 <body>
 <div class="container h-100">
     <div class="row h-100  justify-content-center align-items-center">
-        <form class="form-control-range" action="mail.php" method="post" name="mail">
+        <form class="form-control-range" action="lesson-7-7.php" enctype="multipart/form-data" method="post"
+              name="mail">
             <div class="form-group">
                 <label for="from">
                     От кого:
@@ -97,12 +120,16 @@ if ($submitted) {
                 </label>
                 <textarea class="form-control" id="text" name="text" rows="10"></textarea>
             </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Выберите файл</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
+            </div>
             <button class="col-2 btn btn-primary " name="submit" value="submit">Отправить</button>
         </form>
         <?php if ($error == false) { ?>
             <p>Письмо отправлено!</p>
         <?php } else { ?>
-<!--            <p>Что то пошло не так</p>-->
+            <!--            <p>Что то пошло не так</p>-->
         <?php } ?>
     </div>
 </div>
