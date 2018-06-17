@@ -128,8 +128,6 @@ if ($submitted) {
         </form>
         <?php if ($error == false) { ?>
             <p>Письмо отправлено!</p>
-        <?php } else { ?>
-            <!--            <p>Что то пошло не так</p>-->
         <?php } ?>
     </div>
 </div>
