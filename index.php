@@ -5,6 +5,12 @@
  * Date: 16.06.2018
  * Time: 13:44
  */
+require_once "start.php";
+$mail = Valid();
+echo $mail->validEmail('qwweasd.ru');
+
+
+
 //$url ='http://lesson1.local/?page=1&ref=partner';
 //echo $url.'<br>';
 //$arr = parse_url($url);
@@ -44,25 +50,25 @@ if (isset($_FILES['file'])) {
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="bootstrap-4.1.1/dist/css/bootstrap.css">
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<?= $_COOKIE['ref']; ?>
-
-<form action="index.php" enctype="multipart/form-data" method="post">
-    Файл: <input type="file" name="file">
-    <input type="submit" name="submintbut" value="Отправить">
-</form>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <link rel="stylesheet" href="bootstrap-4.1.1/dist/css/bootstrap.css">-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport"-->
+<!--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+<!--    <title>Document</title>-->
+<!--</head>-->
+<!--<body>-->
+<?//= $_COOKIE['ref']; ?>
+<!---->
+<!--<form action="index.php" enctype="multipart/form-data" method="post">-->
+<!--    Файл: <input type="file" name="file">-->
+<!--    <input type="submit" name="submintbut" value="Отправить">-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
 
 
 
