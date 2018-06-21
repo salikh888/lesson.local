@@ -9,13 +9,13 @@ require_once "../start.php";
 try {
     $email = new ValidClass();
     echo $email->validEmail2('wqw@sas.rt');
-}catch (Exception $e) {
+} catch (Exception $e) {
     echo $e->getMessage();
 }
 echo '<br>';
 try {
     $url = new ValidClass();
-    echo $url->validURL('http://games.istv.uz/');
-}catch (Exception $e) {
+    echo $url->validURL('');
+} catch (Exception $e) {
     echo $e->getMessage();
 }

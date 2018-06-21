@@ -14,14 +14,13 @@ class ValidClass
     public
     static function validEmail2($email)
     {
-        if
-        ($email == null) {
+        if ($email == null) {
             throw new Exception('данные пустые');
             return;
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception('данные некорректные');
             return;
-        } elseif (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        } else {
             return true;
         }
 
@@ -36,7 +35,7 @@ class ValidClass
         } elseif (!filter_var($url, FILTER_VALIDATE_URL)) {
             throw new Exception('данные некорректные');
             return;
-        } elseif (filter_var($url, FILTER_VALIDATE_URL)) {
+        } else {
             return true;
         }
 
