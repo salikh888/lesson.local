@@ -63,7 +63,7 @@ if ($submitted) {
 <body>
 <div class="container h-100">
     <div class="row h-100  justify-content-center align-items-center">
-        <form class="form-control-range" action="mail.php" method="post" name="mail">
+        <form class="form-control-range" action="lesson-7-6.php" method="post" name="mail">
             <div class="form-group">
                 <label for="from">
                     От кого:

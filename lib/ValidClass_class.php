@@ -6,23 +6,22 @@
  * Time: 12:16
  */
 
-class Val  extends Exception
-
+class ValidClass
 {
-private $email;
+    private $email;
+    private $url;
 
     public
-    static function validEmail($email)
+    static function validEmail2($email)
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return true;
-        }
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL) && $email = null) {
+        } elseif ($email == null) {
             throw new Exception('данные пустые');
-        }
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return;
+        } else {
             throw new Exception('данные некорректные');
+            return;
         }
 
     }
@@ -32,10 +31,12 @@ private $email;
     {
         if (filter_var($url, FILTER_VALIDATE_URL)) {
             return true;
-        } elseif (!filter_var($url, FILTER_VALIDATE_URL) && $email = null) {
+        } elseif ($url == null) {
             throw new Exception('данные пустые');
+            return;
         } elseif (!filter_var($url, FILTER_VALIDATE_URL)) {
             throw new Exception('данные некорректные');
+            return;
         }
 
     }
