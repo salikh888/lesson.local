@@ -14,14 +14,15 @@ class ValidClass
     public
     static function validEmail2($email)
     {
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return true;
-        } elseif ($email == null) {
+        if
+        ($email == null) {
             throw new Exception('данные пустые');
             return;
-        } else {
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception('данные некорректные');
             return;
+        } elseif (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return true;
         }
 
     }
@@ -29,17 +30,16 @@ class ValidClass
     public
     static function validURL($url)
     {
-        if (filter_var($url, FILTER_VALIDATE_URL)) {
-            return true;
-        } elseif ($url == null) {
+        if ($url == null) {
             throw new Exception('данные пустые');
             return;
         } elseif (!filter_var($url, FILTER_VALIDATE_URL)) {
             throw new Exception('данные некорректные');
             return;
+        } elseif (filter_var($url, FILTER_VALIDATE_URL)) {
+            return true;
         }
 
     }
 }
 
-?>
