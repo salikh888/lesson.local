@@ -7,16 +7,15 @@ require_once "../start.php";
  * Time: 22:42
  */
 $mail = 'wqw@sas.rt';
+$url = 'wqwsas.rt';
 try {
-    $email = new ValidClass();
-    echo $email->validEmail2($mail);
+    echo ValidClass::validEmail2($mail);
 } catch (Exception $e) {
     echo $e->getMessage();
 }
 echo '<br>';
 try {
-    $url = new ValidClass();
-    echo $url->validURL('');
+    echo ValidClass::validURL($url);
 } catch (Exception $e) {
     echo $e->getMessage();
 }
