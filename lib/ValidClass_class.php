@@ -8,7 +8,6 @@
 
 class ValidClass
 {
-
     public
     static function validEmail2($email)
     {
