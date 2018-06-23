@@ -51,9 +51,14 @@ imagePng($im);
 //imageDestroy($im);
 $image = ob_get_contents();
 ob_end_clean();
-echo '<img src="data:image/png;base64,'.base64_encode($image).'" />';
-if($_POST['submit']){
+//echo '<img src="data:image/png;base64,'.base64_encode($image).'" />';
+print_r($_POST['submit']);
+if(isset($_POST['submit'])){
+    print_r($_POST['kapcha']);
     $kapchaArr = str_split($_POST['kapcha'],4);
+    print_r($kapchaArr);
+    print_r($textarr);
+
     if ($kapchaArr == $textarr){
         echo 'правильно';
     }
@@ -69,8 +74,9 @@ if($_POST['submit']){
     <title>Document</title>
 </head>
 <body>
-<form method="post">
-    <input form="" type="text" name="kapcha">
-    <input type="submit">
+<form method="post" action="functioncapcha.php">
+   <?= '<img src="data:image/png;base64,'.base64_encode($image).'" />'?>
+    <input  type="text" name="kapcha">
+    <input type="submit" name="submit">
 </body>
 </html>
