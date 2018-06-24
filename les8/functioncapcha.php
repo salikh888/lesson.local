@@ -7,62 +7,70 @@
  *
  *
  */
-function randnumorlet()
-{
-    $shouldBeNumber = rand(0, 1);
-    $symbol = $shouldBeNumber ? rand(48, 57) : rand(97, 122);
-    $text = chr($symbol);
-    return $text;
-}
+session_start(); // стартуем сессию (нужно для проверки ввода капчи)s
+require_once 'fun.php';
 
-$im = '';
-$x = '';
-$textarr = [];
+$flack = false;
+//echo $flack . ' - тут фолсе';
+//echo '<br>';
 $im = imagecreatetruecolor(400, 150);
 $color = imageColorAllocate($im, 100, 150, 20);
 imageSetThickness($im, 3);
 imageRectangle($im, 0, 0, 400, 150, $color);
-for ($i = 1; $i <= 4; $i++) {
-    $text = randnumorlet();
-
-    switch ($i) {
-        case $i == 1;
-            $x = rand(10, 90);
-            break;
-        case $i == 2;
-            $x = rand(110, 200);
-            break;
-        case $i == 3;
-            $x = rand(210, 300);
-            break;
-        case $i == 4;
-            $x = rand(310, 390);
-            break;
-
-    }
-    imageSetPixel($im, 400, 150, $color);
-
-    imageTtfText($im, 30, 0, $x, rand(30, 100), imagecolorallocate($im, 255, 255, 0), 'fonts/times.ttf', $text);
-    $textarr[] = $text;
+capchamayker($im, $color);
+if ($_POST['kapcha'] === $_SESSION['texts']) {
+    print ("Капча введена верно.");
+} else {
+    print ("Капча введена неверно.");
 }
+//if ($flack == false) {
+//    capchamayker($im, $color);
+//    $flack = true;
+//    echo $flack . ' - тут тру';
+//    echo '<br>';
+//}
+//if (isset($_SESSION['texts'])) {
+//    $texts = $_SESSION['texts'];
+//    print_r($_SESSION['texts']);
+//}
+//if (isset($_POST['submit']) && !empty($_POST['bgcolor'])){
+//$bgcolor = $_POST['bgcolor'];
+//$_SESSION['bgcolor'] = $bgcolor;
+//if ($_POST['kapcha'] == $texts) {
+//    print ("Капча введена верно.");
+//} else {
+//    print ("Капча введена неверно.");
+//}
+$flack = false;
+echo $texts;
 ob_start();
-//header('Content-Type: image/png');
 imagePng($im);
-//imageDestroy($im);
 $image = ob_get_contents();
 ob_end_clean();
-//echo '<img src="data:image/png;base64,'.base64_encode($image).'" />';
-print_r($_POST['submit']);
-if(isset($_POST['submit'])){
-    print_r($_POST['kapcha']);
-    $kapchaArr = str_split($_POST['kapcha'],4);
-    print_r($kapchaArr);
-    print_r($textarr);
 
-    if ($kapchaArr == $textarr){
-        echo 'правильно';
-    }
-}
+//setcookie('texts', $texts);
+//if (isset($_POST['submit'])) {
+//    $kapchaArr = $_POST['kapcha'];
+//    $texts = $_COOKIE['texts'];
+//    print_r($kapchaArr);
+//    echo $texts;
+//    if ($kapchaArr === $texts) {
+//        echo 'правильно';
+//        $flack = false;
+//    }
+//}
+
+
+//if ($_POST['kapcha'] == $texts) {
+//    print ("Капча введена верно.");
+//} else {
+//    print ("Капча введена неверно.");
+//}
+//$flack = false;
+//echo $texts;
+
+//echo $flack. ' - тут фолсе';
+echo '<br>';
 ?>
 <!doctype html>
 <html lang="en">
@@ -75,8 +83,8 @@ if(isset($_POST['submit'])){
 </head>
 <body>
 <form method="post" action="functioncapcha.php">
-   <?= '<img src="data:image/png;base64,'.base64_encode($image).'" />'?>
-    <input  type="text" name="kapcha">
+    <?= '<img src="data:image/png;base64,' . base64_encode($image) . '" />' ?>
+    <input type="text" name="kapcha">
     <input type="submit" name="submit">
 </body>
 </html>
