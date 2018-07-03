@@ -2,6 +2,13 @@
 /**
  * Created by PhpStorm.
  * User: User
+* Date: 03.07.2018
+* Time: 10:02
+*/
+
+/**
+ * Created by PhpStorm.
+ * User: User
  * Date: 23.06.2018
  * Time: 14:13
  *
@@ -70,7 +77,8 @@ for ($i = 1; $i <= 4; $i++) {
 }
 
 
-if (isset($_SESSION['textarr'])) {
+
+if (empty($_SESSION['textarr'])) {
     $_SESSION['textarr'] = $textarr;
 }
 
@@ -79,15 +87,17 @@ ob_start();
 imagePng($im);
 $image = ob_get_contents();
 ob_end_clean();
-print_r($_POST['submit']);
+$kapchaArr = $_POST['kapcha'];
+$kapchaArr = str_split($kapchaArr);
 
-if (isset($_POST['submit']) && empty($_POST['kapcha'])) {
-    unset($_SESSION['textarr']);
+if (isset($_POST['submit']) && empty($_POST['kapcha']) || $kapchaArr != $_SESSION['textarr']) {
+    $_SESSION['textarr'] = $textarr;
 }
 
+
+//print_r($_SESSION['textarr']);
 if (isset($_POST['submit'])) {
-    $kapchaArr = $_POST['kapcha'];
-    $kapchaArr = str_split($kapchaArr);
+
     if ($kapchaArr == $_SESSION['textarr']) {
         $kapcha = true;
     }
@@ -96,13 +106,14 @@ if (isset($_POST['submit'])) {
 //    }
 
 }
-//print_r($kapchaArr);
-//echo '<br>';
+
 print_r($_SESSION['textarr']);
+echo '<br>';
+print_r($kapchaArr);
 ?>
-<?php //if ($kapcha) { ?>
-<!--    --><?php //unset($_SESSION['textarr']); ?>
-<?php //} else  { ?>
+<?php if ($kapcha) { ?>
+    <?php unset($_SESSION['textarr']); ?>
+<?php } else  { ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -119,7 +130,7 @@ print_r($_SESSION['textarr']);
     <div class="row justify-content-center">
         <div class="col-4">
             <form class="form-control-range row align-items-center d-flex" style="height: 600px" method="post"
-                  action="functioncapcha.php">
+                  action="index.php">
 
                 <div class="row">
                     <div class="col-12 d-flex justify-content-center">
@@ -130,14 +141,14 @@ print_r($_SESSION['textarr']);
                         <div class="form-group form-inline">
                             <input class="form-control" style="width: 100px" maxlength="4" type="text" name="kapcha">
                             <button class="btn btn-secondary" name="submit">Отправить</button>
-                            <?php //} ?>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="col-12 d-flex justify-content-center">
                         <div class="form-group form-inline">
                             <?php if ($kapcha) { ?>
                                 <p>Вы не робот</p>
-                                <a href='functioncapcha.php?f=logout'>Назад</a>
+                                <a href='index.php?f=logout'>Назад</a>
                             <?php } ?>
                         </div>
                     </div>
