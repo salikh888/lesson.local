@@ -47,7 +47,7 @@ function xPosition($index)
 
 function randomfont()
 {
-    $shouldBeNumber = rand(1, 3);
+    $shouldBeNumber = rand(1, 5);
     switch ($shouldBeNumber) {
         case 1;
             $font = 'fonts/arial.ttf';
@@ -58,6 +58,13 @@ function randomfont()
         case 3;
             $font = 'fonts/arial.ttf';
             break;
+        case 4;
+            $font = 'fonts/ARIALNBI.TTF';
+            break;
+        case 5;
+            $font = 'fonts/ariblk.TTF';
+            break;
+
     }
     return $font;
 }
@@ -78,7 +85,7 @@ function kapchaimagemaker($width = 200, $height = 75)
         $x = xPosition($i);
         $font = randomfont();
         noisemaker($im);
-        imageTtfText($im, 30, 0, $x, rand(60, 20), imageColorAllocate($im, 8, 24, 89), $font, $text);
+        imageTtfText($im, 30, 0, $x, rand(50, 30), imageColorAllocate($im, 8, 24, 89), $font, $text);
         $textarr[] = $text;
 
     }

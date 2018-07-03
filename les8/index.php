@@ -10,6 +10,7 @@ session_start();
 
 require_once 'kapchaimagemaker.php';
 
+$kapchaArr = null;
 $arraydata = kapchaimagemaker();
 ob_start();
 imagePng($arraydata['image']);
@@ -35,7 +36,7 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
-<?php if ($kapcha) { ?>
+<?php if ($kapcha) : ?>
     <?php unset($_SESSION['textarr']); ?>
     <div class="col-12 d-flex justify-content-center">
         <div class="form-group form-inline">
@@ -43,8 +44,7 @@ if (isset($_POST['submit'])) {
             <a href='index.php?f=logout'>Назад</a>
         </div>
     </div>
-<?php } else { ?>
-
+<?php else : ?>
     <!doctype html>
     <html lang="en">
     <head>
@@ -79,4 +79,4 @@ if (isset($_POST['submit'])) {
     </div>
     </body>
     </html>
-<?php } ?>
+<?php endif; ?>
