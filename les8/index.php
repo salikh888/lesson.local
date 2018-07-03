@@ -14,7 +14,9 @@
  *
  *
  */
+require_once 'noisemaker.php';
 session_start();
+
 function randnumorlet()
 {
     $shouldBeNumber = rand(0, 1);
@@ -54,23 +56,7 @@ for ($i = 1; $i <= 4; $i++) {
             break;
 
     }
-    imageSetThickness($im, 2);
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageSetPixel($im, rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-
-    imageline($im, rand(5, 195), rand(60, 20), rand(5, 195), rand(60, 20), imageColorAllocate($im, 8, 24, 89));
-    imageline($im, rand(5, 195), rand(60, 20), rand(5, 195), rand(60, 20), imageColorAllocate($im, 240, 240, 240));
+    noisemaker($im);
     imageTtfText($im, 30, 0, $x, rand(60, 20), imageColorAllocate($im, 8, 24, 89), 'fonts/times.ttf', $text);
     $textarr[] = $text;
 
@@ -94,16 +80,11 @@ if (isset($_POST['submit']) && empty($_POST['kapcha']) || $kapchaArr != $_SESSIO
     $_SESSION['textarr'] = $textarr;
 }
 
-
-//print_r($_SESSION['textarr']);
 if (isset($_POST['submit'])) {
 
     if ($kapchaArr == $_SESSION['textarr']) {
         $kapcha = true;
     }
-//    elseif ($kapchaArr != $_SESSION['textarr']) {
-//        unset($_SESSION['textarr']);
-//    }
 
 }
 
