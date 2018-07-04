@@ -9,27 +9,28 @@ session_start();
  */
 
 require_once 'kapchaimagemaker.php';
-
+$kapcha = false;
 $kapchaArr = null;
 $arraydata = kapchaimagemaker();
 ob_start();
 imagePng($arraydata['image']);
 $image = ob_get_contents();
 ob_end_clean();
-$kapcha = false;
+
 if (empty($_SESSION['textarr'])) {
     $_SESSION['textarr'] = $arraydata['array'];
 }
-$kapchaArr = $_POST['kapcha'];
-$kapchaArr = str_split($kapchaArr);
+$kapchaArr = $_POST['kapcha'] ?? false;
+$kapchaArray = str_split($kapchaArr);
 
-if (isset($_POST['submit']) && empty($_POST['kapcha']) || $kapchaArr != $_SESSION['textarr']) {
+if (isset($_POST['submit']) && empty($_POST['kapcha']) || $kapchaArray != $_SESSION['textarr']) {
+
     $_SESSION['textarr'] = $arraydata['array'];
 }
 
 if (isset($_POST['submit'])) {
 
-    if ($kapchaArr == $_SESSION['textarr']) {
+    if ($kapchaArray == $_SESSION['textarr']) {
         $kapcha = true;
     }
 
@@ -63,6 +64,9 @@ if (isset($_POST['submit'])) {
                       action="index.php">
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
+                            <p>Введите код с картинки</p>
+                        </div>
+                        <div class="col-12 d-flex justify-content-center">
                             <?= '<img src="data:image/png;base64,' . base64_encode($image) . '" />' ?>
                         </div>
                         <div class="col-12 p-2 d-flex justify-content-center">
@@ -71,6 +75,9 @@ if (isset($_POST['submit'])) {
                                        name="kapcha">
                                 <button class="btn btn-secondary" name="submit">Отправить</button>
                             </div>
+                        </div>
+                        <div class="col-12 p-2 d-flex justify-content-center">
+
                         </div>
                     </div>
                 </form>
